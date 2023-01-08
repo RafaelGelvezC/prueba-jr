@@ -1,0 +1,172 @@
+<h1>Usuarios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of usersComponent.users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>
+        <button (click)="usersComponent.selectUser(user)">Seleccionar</button>
+        <button (click)="usersComponent.deleteUser(user)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detalles del usuario</h2>
+
+<form *ngIf="usersComponent.selectedUser">
+  <label>
+    Nombre:
+    <input [(ngModel)]="usersComponent.selectedUser.name" name="name">
+  </label>
+  <br>
+  <label>
+    Email:
+    <input [(ngModel)]="usersComponent.selectedUser.email" name="email">
+  </label>
+  <br>
+  <button (click)="usersComponent.updateUser(usersComponent.selectedUser)">Actualizar</button>
+</form>
+
+<h2>Crear usuario</h2>
+
+<form>
+  <label>
+    Nombre:
+    <input #name>
+  </label>
+  <br>
+  <label>
+    Email:
+    <input #email>
+  </label>
+  <br>
+  <button (click)="usersComponent.createUser(name.value, email.value)">Crear</button>
+</form>
+
+<h1>Categorías</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of usersComponent.categories">
+      <td>{{ category.id }}</td>
+      <td>{{ category.name }}</td>
+      <td>
+        <button (click)="usersComponent.selectCategory(category)">Seleccionar</button>
+        <button (click)="usersComponent.deleteCategory(category)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detalles de la categoría</h2>
+
+<form *ngIf="usersComponent.selectedCategory">
+  <label>
+    Nombre:
+    <input [(ngModel)]="usersComponent.selectedCategory.name" name="name">
+  </label>
+  <br>
+  <button (click)="usersComponent.updateCategory(usersComponent.selectedCategory)">Actualizar</button>
+</form>
+<h2>Crear categoría</h2>
+
+<form>
+  <label>
+    Nombre:
+    <input #name>
+  </label>
+  <br>
+  <button (click)="usersComponent.createCategory(name.value)">Crear</button>
+</form>
+
+<h1>Productos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th>Precio</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of usersComponent.products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.category.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>
+        <button (click)="usersComponent.selectProduct(product)">Seleccionar</button>
+        <button (click)="usersComponent.deleteProduct(product)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detalles del producto</h2>
+
+<form *ngIf="usersComponent.selectedProduct">
+  <label>
+    Nombre:
+    <input [(ngModel)]="usersComponent.selectedProduct.name" name="name">
+  </label>
+  <br>
+  <label>
+    Categoría:
+    <select [(ngModel)]="usersComponent.selectedProduct.category" name="category">
+      <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
+    </select>
+  </label>
+  <br>
+  <label>
+    Precio:
+    <input type="number" [(ngModel)]="usersComponent.selectedProduct.price" name="price">
+  </label>
+  <br>
+  <button (click)="usersComponent.updateProduct(usersComponent.selectedProduct)">Actualizar</button>
+</form>
+
+<h2>Crear producto</h2>
+
+  <form>
+    <label>
+      Nombre:
+      <input #name>
+    </label>
+    <br>
+    <label>
+      Categoría:
+      <select #category>
+        <option *ngFor="let category of usersComponent.categories" [value]="category">{{ category.name }}</option>
+      </select>
+    </label>
+    <br>
+    <label>
+      Precio:
+      <input type="number" #price>
+    </label>
+    <br>
+    <button (click)="usersComponent.createProduct(name.value, category.value, price.value)">Crear</button>
+  </form>
+
+
